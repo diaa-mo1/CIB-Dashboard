@@ -1,0 +1,103 @@
+table '_xlnm _FilterDatabase'
+	lineageTag: 4e0065f5-e937-4d96-9bed-922f77d8bbee
+
+	column Test_ID
+		dataType: string
+		lineageTag: 85c1e6b2-8be2-44bc-8dfd-bcf438a2cc9f
+		summarizeBy: none
+		sourceColumn: Test_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Area
+		dataType: string
+		lineageTag: 098871a3-d09a-4c10-8acb-bef9cf5b7d14
+		summarizeBy: none
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Validation_Test
+		dataType: string
+		lineageTag: 0a7881cf-29e4-4e81-86fb-70f2f5ea4aab
+		summarizeBy: none
+		sourceColumn: Validation_Test
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: string
+		lineageTag: 89f6d27f-d2c0-47c3-bf5a-94f71a6e25a3
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column Expected_Result
+		dataType: double
+		lineageTag: 7c5eb8eb-06f4-4ee5-8d8c-dfc98916cf91
+		summarizeBy: sum
+		sourceColumn: Expected_Result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Extracted_Result
+		dataType: double
+		lineageTag: 6830d68d-03a1-435f-9d8e-c9a1b4e7fded
+		summarizeBy: sum
+		sourceColumn: Extracted_Result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Difference
+		dataType: double
+		lineageTag: 0bda2868-4fc2-4b37-aef3-f0104bb91207
+		summarizeBy: sum
+		sourceColumn: Difference
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Status
+		dataType: string
+		lineageTag: 788e459f-f32b-40bf-825d-db696516f136
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Explanation
+		dataType: string
+		lineageTag: fff92355-04e6-4c0d-9773-105af7d3f4d1
+		summarizeBy: none
+		sourceColumn: Explanation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: a5dd42b3-250f-402f-9977-28462b64dd58
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '_xlnm _FilterDatabase' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    #"Extraction_QA!_xlnm._FilterDatabase_DefinedName" = Source{[Item="Extraction_QA!_xlnm._FilterDatabase",Kind="DefinedName"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Extraction_QA!_xlnm._FilterDatabase_DefinedName", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Test_ID", type text}, {"Area", type text}, {"Validation_Test", type text}, {"Period", type text}, {"Expected_Result", type number}, {"Extracted_Result", type number}, {"Difference", type number}, {"Status", type text}, {"Explanation", type text}, {"Source_Page", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

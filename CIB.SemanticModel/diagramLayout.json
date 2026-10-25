@@ -1,0 +1,516 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1990.0060904197912,
+            "y": 850.04034396908833
+          },
+          "nodeIndex": "_xlnm _FilterDatabase",
+          "nodeLineageTag": "4e0065f5-e937-4d96-9bed-922f77d8bbee",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 307.14841218788297
+          },
+          "nodeIndex": "Balance_Sheet",
+          "nodeLineageTag": "d81dc9d8-3166-4cb5-8662-5d9ba17c1a99",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1102.0284968604915,
+            "y": 1027.0798715325386
+          },
+          "nodeIndex": "Cash_Flow",
+          "nodeLineageTag": "7333358a-c7bc-4e80-8089-621ebd662144",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1168.456373738431,
+            "y": 64.83838300155162
+          },
+          "nodeIndex": "Comprehensive_Income",
+          "nodeLineageTag": "9d1b3fc6-c88c-471c-9ce4-5c62d765377a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2254.8394237531247,
+            "y": 857.296026282344
+          },
+          "nodeIndex": "Credit_Risk",
+          "nodeLineageTag": "3c2bb56c-f97d-450f-b470-613c56fe27f4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2531.3394237531247,
+            "y": 859.296026282344
+          },
+          "nodeIndex": "Data_Dictionary",
+          "nodeLineageTag": "5d1aa679-59fe-4053-98f0-759f95a27723",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 987.71198642898094,
+            "y": 700.24919282159863
+          },
+          "nodeIndex": "Dim_Account",
+          "nodeLineageTag": "de937565-66a4-4e62-a809-6633053e2c33",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2847.8394237531247,
+            "y": 1205.296026282344
+          },
+          "nodeIndex": "Dim_Date",
+          "nodeLineageTag": "d92d8ff4-0828-4983-b7cb-1a48763e80b3",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3106.8394237531247,
+            "y": 956.296026282344
+          },
+          "nodeIndex": "Dim_Segment",
+          "nodeLineageTag": "98a2b527-3fbd-4726-8116-81de8bb915a8",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3415.8394237531247,
+            "y": 882.296026282344
+          },
+          "nodeIndex": "Dim_Statement",
+          "nodeLineageTag": "5ad27226-b201-4723-aef8-7223599765f8",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 39.697871908351829,
+            "y": 1266.040144431289
+          },
+          "nodeIndex": "Equity",
+          "nodeLineageTag": "43ea29bb-f68d-43bd-8c7f-93c469ac7530",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1736.6579349316162,
+            "y": 848.71837526226636
+          },
+          "nodeIndex": "Extraction_QA",
+          "nodeLineageTag": "79bf18f3-67fd-4141-b5e6-158b5684f921",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3131.5060904197912,
+            "y": 1475.6293596156772
+          },
+          "nodeIndex": "Financial_Investments",
+          "nodeLineageTag": "09ec7238-ee44-46e1-8bf0-30b60d501bc5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2362.1727570864578,
+            "y": 1469.6293596156772
+          },
+          "nodeIndex": "Financial_Ratios",
+          "nodeLineageTag": "b98c4651-7af9-4bf8-b88f-b2e536817cca",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 309.38751047801526,
+            "y": -50
+          },
+          "nodeIndex": "Income_Statement",
+          "nodeLineageTag": "d078b632-e416-4bf7-8767-9fe527d40f97",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3692.8394237531243,
+            "y": 876.296026282344
+          },
+          "nodeIndex": "KPI (KPI_Calc)",
+          "nodeLineageTag": "554b10ac-5a02-44e5-85d4-56443b936528",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3963.5060904197912,
+            "y": 876.296026282344
+          },
+          "nodeIndex": "KPI_Calc",
+          "nodeLineageTag": "34343179-d0c7-4d26-82ae-e742b2a726a0",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3450.8394237531243,
+            "y": 1355.6293596156775
+          },
+          "nodeIndex": "Loans_Advances",
+          "nodeLineageTag": "32b14780-8294-4af7-9991-d3702231e881",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3458.1727570864582,
+            "y": 1795.6293596156775
+          },
+          "nodeIndex": "Other_Notes",
+          "nodeLineageTag": "c1a47407-796c-4f29-bff9-be8a7e835c2c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3112.1727570864578,
+            "y": 1146.9626929490105
+          },
+          "nodeIndex": "README",
+          "nodeLineageTag": "029298be-94c9-45c4-a0b8-c684c7eb9ab2",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2492.8394237531243,
+            "y": 1802.296026282344
+          },
+          "nodeIndex": "Segments",
+          "nodeLineageTag": "dc782554-2aea-4e3d-ad31-5c238be5a4ad",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 760.75782847896971,
+            "y": 1279.8556625806386
+          },
+          "nodeIndex": "tbl_Balance_Sheet",
+          "nodeLineageTag": "7a7488ed-605c-41db-bc5b-484eddcb83e3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 460.95768648792438,
+            "y": 932.13187658706261
+          },
+          "nodeIndex": "tbl_Cash_Flow",
+          "nodeLineageTag": "855e68cb-a69f-4bcd-8eef-5cb6cad832a3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1727.5517997200925,
+            "y": 1300.5962642482075
+          },
+          "nodeIndex": "tbl_Comprehensive_Income",
+          "nodeLineageTag": "e58946ad-ea4a-450f-a8c6-dcb9e936d040",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5946.8394237531247,
+            "y": 882.296026282344
+          },
+          "nodeIndex": "tbl_Credit_Risk",
+          "nodeLineageTag": "434cfa17-8a3f-40c0-a7f3-8f1e550f2ef4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6230.8394237531247,
+            "y": 884.296026282344
+          },
+          "nodeIndex": "tbl_Data_Dictionary",
+          "nodeLineageTag": "cc111753-cb91-43f3-b416-26f19f01f6cb",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 594.70531381044725,
+            "y": 295.92417624759719
+          },
+          "nodeIndex": "tbl_Dim_Account",
+          "nodeLineageTag": "ffa2cfbe-fd3d-40fe-a035-2cf7c1f99258",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6514.8394237531247,
+            "y": 920.296026282344
+          },
+          "nodeIndex": "tbl_Dim_Date",
+          "nodeLineageTag": "95a83bb4-9f33-4d68-8bf4-133ee72066bb",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6798.8394237531247,
+            "y": 956.296026282344
+          },
+          "nodeIndex": "tbl_Dim_Segment",
+          "nodeLineageTag": "f9d2844d-5515-4368-8c7b-2f6e78169373",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 593.67601262218068,
+            "y": 675.80465253517855
+          },
+          "nodeIndex": "tbl_Dim_Statement",
+          "nodeLineageTag": "947d6fa1-98de-48d6-abd4-1afcaac5ca26",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 365.32281312084729,
+            "y": 1268.7587192313547
+          },
+          "nodeIndex": "tbl_Equity",
+          "nodeLineageTag": "88879104-fb86-4fa4-9341-5b1cf75b5bbd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7082.8394237531247,
+            "y": 882.296026282344
+          },
+          "nodeIndex": "tbl_Financial_Investments",
+          "nodeLineageTag": "9df03216-c82b-46e4-8470-c1fe012af64c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7366.8394237531247,
+            "y": 896.296026282344
+          },
+          "nodeIndex": "tbl_Financial_Ratios",
+          "nodeLineageTag": "31bfb02d-016e-408e-b986-4eda47652af5",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 880.24761069542194,
+            "y": 344.82344935518472
+          },
+          "nodeIndex": "tbl_Income_Statement",
+          "nodeLineageTag": "c8d6567e-6405-4ddd-8a89-f5d7dfd3cfd9",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7650.8394237531247,
+            "y": 882.296026282344
+          },
+          "nodeIndex": "tbl_Loans_Advances",
+          "nodeLineageTag": "16d25407-a611-4ef6-a5da-fb2bbb5bd1fd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7934.8394237531247,
+            "y": 882.296026282344
+          },
+          "nodeIndex": "tbl_Other_Notes",
+          "nodeLineageTag": "d7cac3a9-30ff-4395-af5a-e683ce9fa4e0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8218.8394237531247,
+            "y": 882.296026282344
+          },
+          "nodeIndex": "tbl_Segments",
+          "nodeLineageTag": "de3273af-2e1f-4b04-88de-7a544a5741be",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1452.456373738431,
+            "y": 845.85878808201915
+          },
+          "nodeIndex": "Test_ID (Extraction_QA)",
+          "nodeLineageTag": "24218c63-ca63-4e8e-9bb7-4f8f21d44e9b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 23,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

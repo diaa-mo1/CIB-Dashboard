@@ -1,0 +1,128 @@
+table Extraction_QA
+	lineageTag: 79bf18f3-67fd-4141-b5e6-158b5684f921
+
+	column Test_ID
+		dataType: string
+		lineageTag: d227e750-edf6-4132-a405-dd4878725e86
+		summarizeBy: none
+		sourceColumn: Test_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Area
+		dataType: string
+		lineageTag: ffccd6d7-e8ed-4118-b156-96619d14e08b
+		summarizeBy: none
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Validation_Test
+		dataType: string
+		lineageTag: 428a2277-de0f-4d91-98fe-0f14fda23b15
+		summarizeBy: none
+		sourceColumn: Validation_Test
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: string
+		lineageTag: edce67dd-4b96-472d-bb35-0d7373f7a72f
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column Expected_Result
+		dataType: double
+		lineageTag: 576c0e8f-b29d-4245-806d-5d806788ecdc
+		summarizeBy: sum
+		sourceColumn: Expected_Result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Extracted_Result
+		dataType: double
+		lineageTag: 337961c3-c93d-4e44-9ea8-51ad623226fe
+		summarizeBy: sum
+		sourceColumn: Extracted_Result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Difference
+		dataType: double
+		lineageTag: 7bfc4b26-00d6-4f08-8079-7adf7977053a
+		summarizeBy: sum
+		sourceColumn: Difference
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Status
+		dataType: string
+		lineageTag: 513caad2-cb00-4aea-bd13-5b65626621c1
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Explanation
+		dataType: string
+		lineageTag: aa5eb293-edff-4ff8-830a-86254d1d67e3
+		summarizeBy: none
+		sourceColumn: Explanation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 60f431bf-ee24-4bfa-9ce6-cb2716fd518c
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column11
+		dataType: string
+		lineageTag: 9507af46-9604-43cd-a849-be42201b6dfb
+		summarizeBy: none
+		sourceColumn: Column11
+
+		annotation SummarizationSetBy = Automatic
+
+	column Summary
+		dataType: string
+		lineageTag: f1952187-15b3-4b26-9839-1eaffc1ae8e9
+		summarizeBy: none
+		sourceColumn: Summary
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column13
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e73be72-a424-4de8-8176-36debc1047f0
+		summarizeBy: sum
+		sourceColumn: Column13
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Extraction_QA = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Extraction_QA_Sheet = Source{[Item="Extraction_QA",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Extraction_QA_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Test_ID", type text}, {"Area", type text}, {"Validation_Test", type text}, {"Period", type text}, {"Expected_Result", type number}, {"Extracted_Result", type number}, {"Difference", type number}, {"Status", type text}, {"Explanation", type text}, {"Source_Page", Int64.Type}, {"Column11", type any}, {"Summary", type text}, {"Column13", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

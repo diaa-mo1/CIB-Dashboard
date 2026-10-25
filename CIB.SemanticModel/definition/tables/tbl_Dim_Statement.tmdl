@@ -1,0 +1,56 @@
+table tbl_Dim_Statement
+	isHidden
+	lineageTag: 947d6fa1-98de-48d6-abd4-1afcaac5ca26
+
+	column Statement
+		dataType: string
+		lineageTag: 381c977b-7452-41e8-8869-2100cc0be91d
+		summarizeBy: none
+		sourceColumn: Statement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statement_Type
+		dataType: string
+		lineageTag: 9cd50900-4b63-42e2-a40d-eead39976f0f
+		summarizeBy: none
+		sourceColumn: Statement_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Measurement_Type
+		dataType: string
+		lineageTag: 603d4a50-5ef3-476d-b301-ac98b75cea5f
+		summarizeBy: none
+		sourceColumn: Measurement_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Sheet
+		dataType: string
+		lineageTag: c4978b17-6157-4102-abd8-77bcc3f45d1e
+		summarizeBy: none
+		sourceColumn: Source_Sheet
+
+		annotation SummarizationSetBy = Automatic
+
+	column PDF_Pages
+		dataType: string
+		lineageTag: cad06bec-d785-4cfa-be49-3985af371023
+		summarizeBy: none
+		sourceColumn: PDF_Pages
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Dim_Statement = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Dim_Statement_Table = Source{[Item="tbl_Dim_Statement",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Dim_Statement_Table,{{"Statement", type text}, {"Statement_Type", type text}, {"Measurement_Type", type text}, {"Source_Sheet", type text}, {"PDF_Pages", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

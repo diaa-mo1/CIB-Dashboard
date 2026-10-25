@@ -1,0 +1,149 @@
+table tbl_Balance_Sheet
+	isHidden
+	lineageTag: 7a7488ed-605c-41db-bc5b-484eddcb83e3
+
+	column Account_Key
+		dataType: string
+		lineageTag: ba71a93b-e38a-4995-b7e2-dc76bf85b67f
+		summarizeBy: none
+		sourceColumn: Account_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statement
+		dataType: string
+		lineageTag: eab01cdf-310c-43a9-b521-9062755d8569
+		summarizeBy: none
+		sourceColumn: Statement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: ec49f41d-9907-4422-81af-1ef62a5c376a
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Start_Date
+		dataType: string
+		lineageTag: 48519650-3422-442e-ba1b-a82a31e2e256
+		summarizeBy: none
+		sourceColumn: Period_Start_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_End_Date
+		dataType: string
+		lineageTag: 2ca9af60-b226-4627-b64e-e7b7b81eed94
+		summarizeBy: none
+		sourceColumn: Period_End_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Type
+		dataType: string
+		lineageTag: f052b32f-10b5-471a-91d3-2794394c67ff
+		summarizeBy: none
+		sourceColumn: Period_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: e9ed3856-b7f9-4ff6-837b-34c8e43eb96f
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: fdef2303-6c8c-4993-b94b-9968befb572e
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note_Ref
+		dataType: double
+		lineageTag: f2accb3a-344c-4609-9271-2b297206f145
+		summarizeBy: sum
+		sourceColumn: Note_Ref
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Account_Name
+		dataType: string
+		lineageTag: e90791a3-01aa-4317-a1f5-3a6613e8c8ce
+		summarizeBy: none
+		sourceColumn: Account_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: 213d5b8f-df7b-4f3f-b571-d60b2d09d167
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 0d6d79b8-460c-42f7-9571-44e80ddb7e14
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 8f4511a7-bbfc-40e0-98d6-483927dfbb66
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d852e28-f450-491e-bd12-f0ebae19563b
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: fd374e93-d585-498e-a1a9-19ed640d948f
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: a81a9b63-d196-4221-99ab-276a0adf1582
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Balance_Sheet = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Balance_Sheet_Table = Source{[Item="tbl_Balance_Sheet",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Balance_Sheet_Table,{{"Account_Key", type text}, {"Statement", type text}, {"Reporting_Date", Int64.Type}, {"Period_Start_Date", type any}, {"Period_End_Date", type any}, {"Period_Type", type text}, {"Category", type text}, {"Row_Type", type text}, {"Note_Ref", type number}, {"Account_Name", type text}, {"Amount", Int64.Type}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

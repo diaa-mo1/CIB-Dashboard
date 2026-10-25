@@ -1,0 +1,136 @@
+relationship 54ad35ff-6319-4794-9b7a-7149ebecdbb7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: tbl_Dim_Date.Period_Label
+	toColumn: LocalDateTable_2e22a309-16ce-45a1-aa1a-73aadb97e4bb.Date
+
+relationship e90f612b-2584-4e41-83e1-b9e7d52ed4f5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Date.Period_Label
+	toColumn: LocalDateTable_cc6d1fac-f12e-4bb4-9fee-b8f4b2e43643.Date
+
+relationship AutoDetected_21a5ac1d-90c5-4544-aa62-1b5109f430f2
+	fromColumn: tbl_Balance_Sheet.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_375a5bce-5562-4baa-b66b-facf5ece27c3
+	fromColumn: tbl_Cash_Flow.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_48b3e75d-1d27-41cf-9004-7ee4a29c80b0
+	fromColumn: tbl_Comprehensive_Income.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_6b953c02-c6d3-422d-afc0-0bd0b9345f25
+	fromColumn: tbl_Income_Statement.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_2930f8c3-29d1-4e5f-b0e9-9aa36c34280a
+	fromColumn: Balance_Sheet.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_34cbc708-8618-4de0-b9d9-4070364afb75
+	fromColumn: Cash_Flow.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_f851869e-b077-46d8-a807-bbc69401ab53
+	fromColumn: Comprehensive_Income.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_13702f3d-b194-4918-bb57-1f6959d1267b
+	fromColumn: Income_Statement.Account_Key
+	toColumn: tbl_Dim_Account.Account_Key
+
+relationship AutoDetected_c1d0daf9-7c61-4d82-ae94-923345db2978
+	fromColumn: tbl_Balance_Sheet.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_28fc5c6b-7cfc-41fc-aa88-52cc6e292532
+	fromColumn: tbl_Cash_Flow.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_4d98fd14-8548-4346-8dc1-a1adfcc42b25
+	fromColumn: tbl_Comprehensive_Income.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_4da07568-73d1-40fe-8b9b-0bec967ba526
+	fromColumn: tbl_Income_Statement.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_7a3bb976-d1bb-4154-9b68-131b8fe34183
+	fromColumn: Balance_Sheet.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_42ec401c-82c9-43f4-be62-955d14d2ef53
+	fromColumn: Cash_Flow.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_74da01e7-82ef-45d9-a90b-ae2bd3e8f479
+	fromColumn: Comprehensive_Income.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_88e0aa49-73ca-4693-ab4a-7a62bbeaea80
+	fromColumn: Income_Statement.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship AutoDetected_ec1c6f3a-0450-49ad-912b-26bc9cf94b8d
+	fromColumn: tbl_Balance_Sheet.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_3cb5c1b3-a014-44fd-bca4-bd17cd040676
+	fromColumn: tbl_Cash_Flow.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_fe85830e-77fc-40c4-9b76-194907817f43
+	fromColumn: tbl_Comprehensive_Income.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_396a4dd2-6f69-4cb1-8bda-1438b976d723
+	isActive: false
+	fromColumn: tbl_Dim_Account.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_50fdda4e-13e1-466a-9646-0274b2dc879b
+	fromColumn: tbl_Equity.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_596b37dd-346a-4226-875c-40f8bd21125c
+	fromColumn: tbl_Income_Statement.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_7a9c855a-26ff-425d-acfa-bb2c05c35545
+	fromColumn: Balance_Sheet.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_085fd800-27b3-4ff3-8931-0af2a013fcc8
+	fromColumn: Cash_Flow.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_87a80e91-3581-445a-8049-fd88c2c7e337
+	fromColumn: Comprehensive_Income.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_fdc054c2-0d6c-4230-971f-6f52919132b0
+	isActive: false
+	fromColumn: Dim_Account.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_6535b252-4e73-4c92-a323-df5def39791c
+	fromColumn: Equity.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_31c00671-a166-4cfc-b414-4fa2347af0b1
+	fromColumn: Income_Statement.Statement
+	toColumn: tbl_Dim_Statement.Statement
+
+relationship AutoDetected_8e236322-187e-4012-9a12-0a0da7f2fcf5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: '_xlnm _FilterDatabase'.Test_ID
+	toColumn: Extraction_QA.Test_ID
+
+relationship AutoDetected_0725d567-5ed9-419d-8719-abd709c17166
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Test_ID (Extraction_QA)'.Test_ID
+	toColumn: Extraction_QA.Test_ID
+

@@ -1,0 +1,76 @@
+table Dim_Date
+	lineageTag: d92d8ff4-0828-4983-b7cb-1a48763e80b3
+
+	column Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c465238-24b7-445e-a6c0-275f30d6486c
+		summarizeBy: sum
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: f953a78f-4317-4ec7-90b7-ca8aba64255c
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: c8405432-5d51-4798-b56c-7dce09c0734e
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: be626903-6ea6-4b34-a729-e32724a79243
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Label
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f1593d7e-fc68-4fb8-a97d-60a75dff7a56
+		summarizeBy: none
+		sourceColumn: Period_Label
+
+		variation Variation
+			isDefault
+			relationship: e90f612b-2584-4e41-83e1-b9e7d52ed4f5
+			defaultHierarchy: LocalDateTable_cc6d1fac-f12e-4bb4-9fee-b8f4b2e43643.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Date_Role
+		dataType: string
+		lineageTag: be1154d5-334b-4e15-9e82-6c22a3ec9ec6
+		summarizeBy: none
+		sourceColumn: Date_Role
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Date = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Dim_Date_Sheet = Source{[Item="Dim_Date",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Dim_Date_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", Int64.Type}, {"Year", Int64.Type}, {"Quarter", Int64.Type}, {"Month", Int64.Type}, {"Period_Label", type date}, {"Date_Role", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

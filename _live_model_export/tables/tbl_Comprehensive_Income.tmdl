@@ -1,0 +1,148 @@
+table tbl_Comprehensive_Income
+	lineageTag: e58946ad-ea4a-450f-a8c6-dcb9e936d040
+
+	column Account_Key
+		dataType: string
+		lineageTag: c7a87d7d-2b04-4870-beb3-e46a47416697
+		summarizeBy: none
+		sourceColumn: Account_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statement
+		dataType: string
+		lineageTag: 0f257a4f-fc48-4ac4-ba10-ac5e9b137c26
+		summarizeBy: none
+		sourceColumn: Statement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: e8f4cce9-6cad-4ae2-a0db-16c3b1ecfc32
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Start_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: b94b47f5-d8ee-4a06-b47b-6e890d4aa417
+		summarizeBy: sum
+		sourceColumn: Period_Start_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_End_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: c014af5e-38aa-4e25-a24c-f3f536294edf
+		summarizeBy: sum
+		sourceColumn: Period_End_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Type
+		dataType: string
+		lineageTag: a2bd2682-298a-49aa-a06a-a532806568cf
+		summarizeBy: none
+		sourceColumn: Period_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 3a0987c7-ae72-493f-a74e-eaac8bf664dc
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: a22e6192-50fb-4420-905f-282075ee7689
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note_Ref
+		dataType: string
+		lineageTag: 6e5ad19a-fb09-4afc-ac57-46fa21cf4cd9
+		summarizeBy: none
+		sourceColumn: Note_Ref
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_Name
+		dataType: string
+		lineageTag: 3641c25c-7f62-4907-9008-502ba0cc6690
+		summarizeBy: none
+		sourceColumn: Account_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: a86b0a8b-0201-494a-bf6f-491292105b46
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 100b7994-3954-4574-b3e5-11b341f06b6c
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: c8fc42e0-907c-4112-af40-39e0c4a4498d
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: f6adb4f2-cbaa-43ee-85a4-765834d0c0e1
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: f3499a90-c500-4a94-b643-9f0142a35f85
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 37c9d5f3-e209-4ebe-b949-b18fb8d3546d
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Comprehensive_Income = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Comprehensive_Income_Table = Source{[Item="tbl_Comprehensive_Income",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Comprehensive_Income_Table,{{"Account_Key", type text}, {"Statement", type text}, {"Reporting_Date", Int64.Type}, {"Period_Start_Date", Int64.Type}, {"Period_End_Date", Int64.Type}, {"Period_Type", type text}, {"Category", type text}, {"Row_Type", type text}, {"Note_Ref", type any}, {"Account_Name", type text}, {"Amount", Int64.Type}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

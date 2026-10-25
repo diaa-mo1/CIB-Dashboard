@@ -1,0 +1,55 @@
+table Dim_Statement
+	lineageTag: 5ad27226-b201-4723-aef8-7223599765f8
+
+	column Column1
+		dataType: string
+		lineageTag: f44ac1e5-f348-44a3-9d80-063cad145bb2
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: 75446e00-3db6-41a2-b8c1-d482a581693c
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: f2042783-49c4-4015-b1f9-e9cb5c3ab820
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: 4cd4ae87-a657-42dc-82cd-86cc5e65e488
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column5
+		dataType: string
+		lineageTag: 6af1f1a6-2952-4898-844d-b7fde3c5f48b
+		summarizeBy: none
+		sourceColumn: Column5
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Statement = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Dim_Statement_Sheet = Source{[Item="Dim_Statement",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Dim_Statement_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

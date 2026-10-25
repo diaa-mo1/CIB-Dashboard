@@ -1,0 +1,131 @@
+table Loans_Advances
+	lineageTag: 32b14780-8294-4af7-9991-d3702231e881
+
+	column Table_Name
+		dataType: string
+		lineageTag: 80a172d0-7146-41b9-8a4d-9ba8fc702b2d
+		summarizeBy: none
+		sourceColumn: Table_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Counterparty
+		dataType: string
+		lineageTag: 9cc3694f-3b21-4c0e-81ae-c0609bcd9888
+		summarizeBy: none
+		sourceColumn: Counterparty
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: d864aba2-fa23-41da-a663-68e03baafc3c
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: c9c31ec3-43f7-4e12-b04c-12a482f264a1
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Line_Item
+		dataType: string
+		lineageTag: a22c8613-ae91-4707-976d-ad84e310c417
+		summarizeBy: none
+		sourceColumn: Line_Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: 228e60b1-2126-4e7a-a6be-ae6da50a0562
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 382030fb-d9f5-4c6e-b4a5-6893bf7c7a91
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Type
+		dataType: string
+		lineageTag: 42d115a9-1838-43de-8b9a-f190b20b51d4
+		summarizeBy: none
+		sourceColumn: Period_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: 78e7c3c0-61f8-4f72-a1e0-37731b2e9f60
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 51914de6-8f9a-4013-a2fe-e5653006b04d
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 708fd8b2-271a-4975-baad-8b88773b2215
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: c7a4cf7d-a522-47b2-8c1f-24b35c5d2541
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: 301c12e4-f329-4d4b-8c63-91bbc8852a66
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: ec99ead4-d165-4e3c-a19a-09e5dfec15d6
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Loans_Advances = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Loans_Advances_Sheet = Source{[Item="Loans_Advances",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Loans_Advances_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Table_Name", type text}, {"Counterparty", type text}, {"Group", type text}, {"Product", type text}, {"Line_Item", type text}, {"Row_Type", type text}, {"Reporting_Date", Int64.Type}, {"Period_Type", type text}, {"Amount", Int64.Type}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

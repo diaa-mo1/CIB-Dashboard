@@ -1,0 +1,60 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["tbl_Balance_Sheet","tbl_Cash_Flow","tbl_Comprehensive_Income","tbl_Credit_Risk","tbl_Data_Dictionary","tbl_Dim_Account","tbl_Dim_Date","tbl_Dim_Segment","tbl_Dim_Statement","tbl_Equity","tbl_Financial_Investments","tbl_Financial_Ratios","tbl_Income_Statement","tbl_Loans_Advances","tbl_Other_Notes","tbl_Segments","Balance_Sheet","Cash_Flow","Comprehensive_Income","Credit_Risk","Data_Dictionary","Dim_Account","Dim_Date","Dim_Segment","Dim_Statement","Equity","Extraction_QA","Financial_Investments","Financial_Ratios","Income_Statement","KPI_Calc","Loans_Advances","Other_Notes","README","Segments","_xlnm _FilterDatabase","KPI (KPI_Calc)","Test_ID (Extraction_QA)"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table tbl_Balance_Sheet
+ref table tbl_Cash_Flow
+ref table tbl_Comprehensive_Income
+ref table tbl_Credit_Risk
+ref table tbl_Data_Dictionary
+ref table tbl_Dim_Account
+ref table tbl_Dim_Date
+ref table DateTableTemplate_b028c8b9-bdb5-448c-9398-367c19977148
+ref table LocalDateTable_2e22a309-16ce-45a1-aa1a-73aadb97e4bb
+ref table tbl_Dim_Segment
+ref table tbl_Dim_Statement
+ref table tbl_Equity
+ref table tbl_Financial_Investments
+ref table tbl_Financial_Ratios
+ref table tbl_Income_Statement
+ref table tbl_Loans_Advances
+ref table tbl_Other_Notes
+ref table tbl_Segments
+ref table Balance_Sheet
+ref table Cash_Flow
+ref table Comprehensive_Income
+ref table Credit_Risk
+ref table Data_Dictionary
+ref table Dim_Account
+ref table Dim_Date
+ref table LocalDateTable_cc6d1fac-f12e-4bb4-9fee-b8f4b2e43643
+ref table Dim_Segment
+ref table Dim_Statement
+ref table Equity
+ref table Extraction_QA
+ref table Financial_Investments
+ref table Financial_Ratios
+ref table Income_Statement
+ref table KPI_Calc
+ref table Loans_Advances
+ref table Other_Notes
+ref table README
+ref table Segments
+ref table '_xlnm _FilterDatabase'
+ref table 'KPI (KPI_Calc)'
+ref table 'Test_ID (Extraction_QA)'
+ref table LocalDateTable_b61564be-fc77-499c-8a7d-1a15489a12c1
+
+ref cultureInfo en-US
+

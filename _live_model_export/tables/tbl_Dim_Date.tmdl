@@ -1,0 +1,75 @@
+table tbl_Dim_Date
+	lineageTag: 95a83bb4-9f33-4d68-8bf4-133ee72066bb
+
+	column Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d266037-58b0-4ede-b409-f3369a9fe6e4
+		summarizeBy: sum
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f56fcf7-489c-4a11-add3-71e02bf69676
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 61975f5a-6320-4aff-9345-92dfaf75be6d
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: b1b17d06-a994-45fc-ac6d-fd39f37d4400
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Label
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 733c10b6-89e7-4e24-b274-36962ed6b342
+		summarizeBy: none
+		sourceColumn: Period_Label
+
+		variation Variation
+			isDefault
+			relationship: 54ad35ff-6319-4794-9b7a-7149ebecdbb7
+			defaultHierarchy: LocalDateTable_2e22a309-16ce-45a1-aa1a-73aadb97e4bb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Date_Role
+		dataType: string
+		lineageTag: 4581ace3-1541-4766-8bcf-cb43613f461f
+		summarizeBy: none
+		sourceColumn: Date_Role
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Dim_Date = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Dim_Date_Table = Source{[Item="tbl_Dim_Date",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Dim_Date_Table,{{"Date", Int64.Type}, {"Year", Int64.Type}, {"Quarter", Int64.Type}, {"Month", Int64.Type}, {"Period_Label", type date}, {"Date_Role", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

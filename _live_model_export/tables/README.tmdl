@@ -1,0 +1,23 @@
+table README
+	lineageTag: 029298be-94c9-45c4-a0b8-c684c7eb9ab2
+
+	column Column1
+		dataType: string
+		lineageTag: a092a6d0-82b8-447d-a333-983b6257db7e
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition README = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    README_Sheet = Source{[Item="README",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(README_Sheet,{{"Column1", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

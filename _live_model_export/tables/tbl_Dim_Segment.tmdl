@@ -1,0 +1,40 @@
+table tbl_Dim_Segment
+	lineageTag: f9d2844d-5515-4368-8c7b-2f6e78169373
+
+	column Segment_Type
+		dataType: string
+		lineageTag: 138fcec5-bfd9-40cd-9166-ae5e83526856
+		summarizeBy: none
+		sourceColumn: Segment_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: f28a665c-8459-4ea6-9af1-4a87a62e0f39
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: ad9b322f-9155-4a2e-b02a-0f9293fa7052
+		summarizeBy: sum
+		sourceColumn: Sort_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Dim_Segment = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Dim_Segment_Table = Source{[Item="tbl_Dim_Segment",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Dim_Segment_Table,{{"Segment_Type", type text}, {"Segment", type text}, {"Sort_Order", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

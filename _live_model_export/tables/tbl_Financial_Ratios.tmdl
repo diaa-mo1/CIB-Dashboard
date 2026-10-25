@@ -1,0 +1,83 @@
+table tbl_Financial_Ratios
+	lineageTag: 31bfb02d-016e-408e-b986-4eda47652af5
+
+	column Metric
+		dataType: string
+		lineageTag: 35e7b9de-042a-4008-9d52-14acf594ac5d
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scope
+		dataType: string
+		lineageTag: 6a2b9010-e5ee-45ba-bfaf-669dc063269b
+		summarizeBy: none
+		sourceColumn: Scope
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: d16f412f-17c4-4751-8b3c-84bf1b2d12f0
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: 6886262d-dc4c-4d1f-b8f4-dfa59913ec71
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Unit
+		dataType: string
+		lineageTag: 41ce3d38-b3ba-47f7-9c58-5cec10d71c07
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 4305b6d7-b058-4885-a4da-c33c8e6b4af3
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: 89f1f719-12f7-497f-8ea0-dac6efff0076
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 8e42acbb-f269-438c-86d9-b7c714adc1f6
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Financial_Ratios = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Financial_Ratios_Table = Source{[Item="tbl_Financial_Ratios",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Financial_Ratios_Table,{{"Metric", type text}, {"Scope", type text}, {"Reporting_Date", Int64.Type}, {"Value", type number}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

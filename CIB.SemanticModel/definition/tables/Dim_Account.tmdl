@@ -1,0 +1,83 @@
+table Dim_Account
+	lineageTag: de937565-66a4-4e62-a809-6633053e2c33
+
+	column Account_Key
+		dataType: string
+		lineageTag: 952a7372-3b81-47ec-a7f4-c8bc22f546aa
+		summarizeBy: none
+		sourceColumn: Account_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statement
+		dataType: string
+		lineageTag: fab20171-b516-48b7-af52-85cbaae5e12b
+		summarizeBy: none
+		sourceColumn: Statement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: dc46081c-d29e-4220-83f2-9f911beb744a
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_Name
+		dataType: string
+		lineageTag: db5e1fa7-429a-4d9c-8836-8e6447468301
+		summarizeBy: none
+		sourceColumn: Account_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: 994bee7c-9e58-4f47-bd4f-a6424bfc1763
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note_Ref
+		dataType: double
+		lineageTag: 9c5ad127-c673-4e34-8992-7829a741c8d8
+		summarizeBy: sum
+		sourceColumn: Note_Ref
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sort_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 19b44f4c-a869-4613-8c68-4ac1efb58023
+		summarizeBy: sum
+		sourceColumn: Sort_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Is_Total
+		dataType: string
+		lineageTag: 2c3080aa-d14b-4f31-a9bf-44c4a637279f
+		summarizeBy: none
+		sourceColumn: Is_Total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Account = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Dim_Account_Sheet = Source{[Item="Dim_Account",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Dim_Account_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Account_Key", type text}, {"Statement", type text}, {"Category", type text}, {"Account_Name", type text}, {"Row_Type", type text}, {"Note_Ref", type number}, {"Sort_Order", Int64.Type}, {"Is_Total", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

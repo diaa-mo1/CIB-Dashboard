@@ -1,0 +1,285 @@
+{
+  "name": "CIB Executive Light",
+  "dataColors": [
+    "#004A88",
+    "#F58420",
+    "#5B9BD5",
+    "#5A6B7F",
+    "#1F8A8A"
+  ],
+  "background": "#EEF2F7",
+  "foreground": "#1B2B3F",
+  "foregroundNeutralSecondary": "#5A6B7F",
+  "foregroundNeutralTertiary": "#5A6B7F",
+  "tableAccent": "#004A88",
+  "good": "#0E7A4F",
+  "neutral": "#8A6100",
+  "bad": "#C0392B",
+  "textClasses": {
+    "callout": {
+      "fontSize": 56,
+      "fontFace": "IBM Plex Sans Arabic",
+      "color": "#004A88"
+    },
+    "title": {
+      "fontSize": 28,
+      "fontFace": "IBM Plex Sans Arabic",
+      "color": "#004A88"
+    },
+    "header": {
+      "fontSize": 21,
+      "fontFace": "IBM Plex Sans Arabic",
+      "color": "#1B2B3F"
+    },
+    "label": {
+      "fontSize": 18,
+      "fontFace": "IBM Plex Sans Arabic",
+      "color": "#5A6B7F"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 12
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "width": 1,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "preset": "Custom",
+            "angle": 90,
+            "shadowDistance": 2,
+            "shadowBlur": 8,
+            "shadowSpread": 0,
+            "transparency": 84
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontSize": 28,
+            "fontFace": "IBM Plex Sans Arabic",
+            "titleWrap": true
+          }
+        ],
+        "categoryAxis": [
+          {
+            "fontSize": 18,
+            "labelColor": {
+              "solid": {
+                "color": "#5A6B7F"
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": "#E3EAF3"
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontSize": 18,
+            "labelColor": {
+              "solid": {
+                "color": "#5A6B7F"
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": "#E3EAF3"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "fontSize": 18,
+            "labelColor": {
+              "solid": {
+                "color": "#5A6B7F"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "fontSize": 21,
+            "fontFace": "IBM Plex Sans Arabic",
+            "alignment": "center",
+            "titleWrap": true
+          }
+        ]
+      }
+    },
+    "lineChart": {
+      "*": {
+        "lineStyles": [
+          {
+            "strokeWidth": 3
+          }
+        ]
+      }
+    },
+    "pageNavigator": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#DDEAF7"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": false
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "padding": [
+          {
+            "left": 18,
+            "top": 22,
+            "right": 18,
+            "bottom": 22
+          }
+        ],
+        "text": [
+          {
+            "$id": "default",
+            "fontSize": 18,
+            "fontColor": {
+              "solid": {
+                "color": "#5A6B7F"
+              }
+            },
+            "leftMargin": 14,
+            "rightMargin": 14,
+            "topMargin": 10,
+            "bottomMargin": 10
+          },
+          {
+            "$id": "selected",
+            "fontSize": 18,
+            "fontColor": {
+              "solid": {
+                "color": "#004A88"
+              }
+            },
+            "leftMargin": 14,
+            "rightMargin": 14,
+            "topMargin": 10,
+            "bottomMargin": 10
+          }
+        ],
+        "shape": [
+          {
+            "$id": "default",
+            "tileShape": "rectangle",
+            "roundEdge": 8
+          }
+        ],
+        "fill": [
+          {
+            "$id": "default",
+            "fillColor": {
+              "solid": {
+                "color": "#DDEAF7"
+              }
+            },
+            "transparency": 0
+          },
+          {
+            "$id": "hover",
+            "fillColor": {
+              "solid": {
+                "color": "#F8FBFE"
+              }
+            },
+            "transparency": 0
+          },
+          {
+            "$id": "selected",
+            "fillColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outline": [
+          {
+            "$id": "default",
+            "transparency": 100
+          },
+          {
+            "$id": "selected",
+            "transparency": 100
+          }
+        ],
+        "accentBar": [
+          {
+            "$id": "selected",
+            "show": true,
+            "position": "Right",
+            "weight": 4,
+            "color": {
+              "solid": {
+                "color": "#F58420"
+              }
+            }
+          }
+        ],
+        "layout": [
+          {
+            "orientation": 2,
+            "cellPadding": 8
+          }
+        ]
+      }
+    }
+  }
+}

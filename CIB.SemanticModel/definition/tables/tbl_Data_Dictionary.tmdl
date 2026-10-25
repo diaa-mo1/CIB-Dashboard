@@ -1,0 +1,88 @@
+table tbl_Data_Dictionary
+	isHidden
+	lineageTag: cc111753-cb91-43f3-b416-26f19f01f6cb
+
+	column Sheet
+		dataType: string
+		lineageTag: ab040f3e-9396-429a-96c5-86439b49bb76
+		summarizeBy: none
+		sourceColumn: Sheet
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column
+		dataType: string
+		lineageTag: cdda4645-ba8c-4932-86cd-cf9b57f71d8d
+		summarizeBy: none
+		sourceColumn: Column
+
+		annotation SummarizationSetBy = Automatic
+
+	column Definition
+		dataType: string
+		lineageTag: 8685717a-47b1-4922-8d1c-71441035ed43
+		summarizeBy: none
+		sourceColumn: Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Type
+		dataType: string
+		lineageTag: 3aedbf4d-b36a-491d-a2ac-1f719943f6e2
+		summarizeBy: none
+		sourceColumn: Data_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit_or_Currency
+		dataType: string
+		lineageTag: 8b4e67e9-a470-478d-b068-e5e8222a39f5
+		summarizeBy: none
+		sourceColumn: Unit_or_Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dimension_or_Measure
+		dataType: string
+		lineageTag: 2c36b464-d421-4cac-b293-5fb9b83cd17d
+		summarizeBy: none
+		sourceColumn: Dimension_or_Measure
+
+		annotation SummarizationSetBy = Automatic
+
+	column Transformation_Applied
+		dataType: string
+		lineageTag: 90ee40e1-bc26-42e6-be86-be9f267be179
+		summarizeBy: none
+		sourceColumn: Transformation_Applied
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reported_or_Calculated
+		dataType: string
+		lineageTag: 2d7b15bf-43e0-44b0-b36c-0d1a46454ee0
+		summarizeBy: none
+		sourceColumn: Reported_or_Calculated
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assumptions_Issues
+		dataType: string
+		lineageTag: 00034fe3-a36f-4996-a44e-ec5707b192fc
+		summarizeBy: none
+		sourceColumn: Assumptions_Issues
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Data_Dictionary = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Data_Dictionary_Table = Source{[Item="tbl_Data_Dictionary",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Data_Dictionary_Table,{{"Sheet", type text}, {"Column", type text}, {"Definition", type text}, {"Data_Type", type text}, {"Unit_or_Currency", type text}, {"Dimension_or_Measure", type text}, {"Transformation_Applied", type text}, {"Reported_or_Calculated", type text}, {"Assumptions_Issues", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

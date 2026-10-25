@@ -1,0 +1,141 @@
+table tbl_Financial_Investments
+	lineageTag: 9df03216-c82b-46e4-8470-c1fe012af64c
+
+	column Table_Name
+		dataType: string
+		lineageTag: 59730f31-4831-43dc-93bc-19385401b861
+		summarizeBy: none
+		sourceColumn: Table_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note_Ref
+		dataType: double
+		lineageTag: cfbc11f9-00aa-43e5-ac0b-17d6e36eba14
+		summarizeBy: sum
+		sourceColumn: Note_Ref
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 0788b63b-5887-4741-ae1e-f7636e331709
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Type
+		dataType: string
+		lineageTag: 5ddfbe53-b7a6-4dc6-becb-8d133ad2ade9
+		summarizeBy: none
+		sourceColumn: Period_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Listing_Status
+		dataType: string
+		lineageTag: 6b958017-f598-4259-9d34-079193f6049c
+		summarizeBy: none
+		sourceColumn: Listing_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instrument_Type
+		dataType: string
+		lineageTag: 5e4035ed-3bd8-4a13-893f-e839ebf40aea
+		summarizeBy: none
+		sourceColumn: Instrument_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Measurement_Category
+		dataType: string
+		lineageTag: dca785e4-7cf1-4555-871d-ef780f896583
+		summarizeBy: none
+		sourceColumn: Measurement_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		dataType: string
+		lineageTag: 0a115103-f009-4842-98df-349fa72003e0
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: 17ef3981-6a8b-4a5c-9f83-3911a5c0f1d9
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: double
+		lineageTag: 7b67f288-7f37-4af0-8ffe-dc50819cd677
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Currency
+		dataType: string
+		lineageTag: 359d9194-c17a-4c29-9b6b-4b67c0a76322
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: d7b051fd-e11c-4b2f-97dc-90a3c6ed740f
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ab84423-1ea5-4b3b-9685-34af5f52e130
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: 21715a7d-bc73-4897-844d-f473d9d10237
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: b8ba19c8-b78c-4a30-8298-d3ad1c7c4085
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Financial_Investments = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Financial_Investments_Table = Source{[Item="tbl_Financial_Investments",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Financial_Investments_Table,{{"Table_Name", type text}, {"Note_Ref", type number}, {"Reporting_Date", Int64.Type}, {"Period_Type", type text}, {"Listing_Status", type text}, {"Instrument_Type", type text}, {"Measurement_Category", type text}, {"Metric", type text}, {"Row_Type", type text}, {"Amount", type number}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

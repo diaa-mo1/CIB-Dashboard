@@ -1,0 +1,143 @@
+table tbl_Other_Notes
+	lineageTag: d7cac3a9-30ff-4395-af5a-e683ce9fa4e0
+
+	column Note_Ref
+		dataType: double
+		lineageTag: 88d81dca-c262-4f03-beb3-edd5130fff81
+		summarizeBy: sum
+		sourceColumn: Note_Ref
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Table_Title
+		dataType: string
+		lineageTag: d9ff9e08-859a-4585-8632-18b0c29d8cc9
+		summarizeBy: none
+		sourceColumn: Table_Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub_Group
+		dataType: string
+		lineageTag: 326a26d6-fdbf-4d30-a196-ee86aed25422
+		summarizeBy: none
+		sourceColumn: Sub_Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Line_Item
+		dataType: string
+		lineageTag: b913d945-ad16-49fa-9e6b-c8196e2161ee
+		summarizeBy: none
+		sourceColumn: Line_Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: 2b597c85-4389-4063-96be-ba73df98b228
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 823a2d4d-ceed-494c-870d-ad3564055bc3
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Start_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 479793e5-92a1-4b19-8b61-593dbd019cd9
+		summarizeBy: sum
+		sourceColumn: Period_Start_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_End_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 2aea234d-0dce-4ba3-b8e6-9b89e1854fbd
+		summarizeBy: sum
+		sourceColumn: Period_End_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Type
+		dataType: string
+		lineageTag: 2dcba0d6-9c84-4f40-b87d-e082cc18d359
+		summarizeBy: none
+		sourceColumn: Period_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: double
+		lineageTag: c5bc0246-8d16-4290-baa1-9526d86a35d6
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Currency
+		dataType: string
+		lineageTag: eaa26489-2223-4cab-8b55-e0137f0a54a4
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 67c6138d-ac00-429d-9a47-324de099bf4c
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: c0a04480-bff6-4d7d-9cc1-52849276de15
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: 1e308197-ec0e-495c-8ead-a170a93a5a55
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 8cac5de5-0d15-4b1c-a28c-bab72bf18010
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Other_Notes = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Other_Notes_Table = Source{[Item="tbl_Other_Notes",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Other_Notes_Table,{{"Note_Ref", type number}, {"Table_Title", type text}, {"Sub_Group", type text}, {"Line_Item", type text}, {"Row_Type", type text}, {"Reporting_Date", Int64.Type}, {"Period_Start_Date", Int64.Type}, {"Period_End_Date", Int64.Type}, {"Period_Type", type text}, {"Amount", type number}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type any}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

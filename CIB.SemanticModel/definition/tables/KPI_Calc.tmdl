@@ -1,0 +1,331 @@
+table KPI_Calc
+	lineageTag: 34343179-d0c7-4d26-82ae-e742b2a726a0
+
+	/// Selected date, defaulting to the latest available reporting date when the date slicer is unfiltered.
+	measure 'Selected Reporting Date' = COALESCE(SELECTEDVALUE(Dim_Date[Date_Value]), CALCULATE(MAX(Dim_Date[Date_Value]), REMOVEFILTERS(Dim_Date)))
+		formatString: dd-mmm-yyyy
+		lineageTag: 7c9242b9-3f1f-4fd1-afeb-85ba2e809d08
+
+	/// Reported total assets (BS13), EGP thousands; defaults to 31-Mar-2026.
+	measure 'Total Assets' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Account_Key] = "BS13", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 5360f5ca-7386-4a0e-aedd-9c861853decf
+
+	/// Reported total liabilities (BS23), EGP thousands.
+	measure 'Total Liabilities' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Account_Key] = "BS23", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 09c11793-ca95-4c15-86ed-440ead151ad4
+
+	/// Reported shareholders equity plus non-controlling interests (BS30), EGP thousands.
+	measure 'Total Equity incl NCI' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Account_Key] = "BS30", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 87852cfe-d12c-4d60-9328-497b09c939de
+
+	/// Due to customers (BS15), EGP thousands.
+	measure 'Customer Deposits' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Account_Key] = "BS15", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 6c24b809-2636-423c-a2d1-4f97c4753af9
+
+	/// Net loans and advances to customers (BS04), EGP thousands.
+	measure 'Net Customer Loans' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Account_Key] = "BS04", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 1c3cd580-9f3e-4aa2-9ad9-c85308f209b8
+
+	/// Net customer loans divided by customer deposits.
+	measure 'Loan to Deposit Ratio' = DIVIDE([Net Customer Loans], [Customer Deposits])
+		formatString: 0.0%
+		lineageTag: b973317a-ccac-4d0d-99fb-731ec092606b
+
+	measure 'Assets Dec 2025' = CALCULATE([Total Assets], REMOVEFILTERS(Dim_Date), Dim_Date[Date_Value] = DATE(2025, 12, 31))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 818db8ea-5570-454e-b522-7bf473ca2af4
+
+	measure 'Loans Dec 2025' = CALCULATE([Net Customer Loans], REMOVEFILTERS(Dim_Date), Dim_Date[Date_Value] = DATE(2025, 12, 31))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 8b648704-01ab-4daa-845b-3dccea84d959
+
+	measure 'Deposits Dec 2025' = CALCULATE([Customer Deposits], REMOVEFILTERS(Dim_Date), Dim_Date[Date_Value] = DATE(2025, 12, 31))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 0123a5f1-843c-4802-a917-63ea54f001d2
+
+	measure 'Assets Change vs Dec 2025' = [Total Assets] - [Assets Dec 2025]
+		formatString: #,##0;(#,##0);-
+		lineageTag: 684e73e6-0a80-4199-b6a3-0b8a6f79f16f
+
+	measure 'Assets Growth vs Dec 2025' = DIVIDE([Assets Change vs Dec 2025], [Assets Dec 2025])
+		formatString: 0.0%;(0.0%);-
+		lineageTag: a0f841c5-cdd7-4545-9413-c846542635bd
+
+	measure 'Loans Change vs Dec 2025' = [Net Customer Loans] - [Loans Dec 2025]
+		formatString: #,##0;(#,##0);-
+		lineageTag: 979758e0-3f9b-481a-9005-05ae8f46b7ed
+
+	measure 'Loans Growth vs Dec 2025' = DIVIDE([Loans Change vs Dec 2025], [Loans Dec 2025])
+		formatString: 0.0%;(0.0%);-
+		lineageTag: 31bfd4f6-a03f-4f5f-8268-f62eb6f3f1cb
+
+	measure 'Deposits Change vs Dec 2025' = [Customer Deposits] - [Deposits Dec 2025]
+		formatString: #,##0;(#,##0);-
+		lineageTag: ccac57f9-1a53-4c95-85c8-11564da62fb4
+
+	measure 'Deposits Growth vs Dec 2025' = DIVIDE([Deposits Change vs Dec 2025], [Deposits Dec 2025])
+		formatString: 0.0%;(0.0%);-
+		lineageTag: 6adf78c9-dcad-403a-a9a9-d25cf13ca308
+
+	/// Reported subtotal IS03, EGP thousands.
+	measure 'Net Interest Income' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS03", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: dd47f839-9c00-4e69-a221-1886ed6d3d9b
+
+	/// Reported subtotal IS06, EGP thousands.
+	measure 'Net Fee Income' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS06", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: f500308b-9762-4843-a1c8-888535ecb21e
+
+	measure 'Profit Before Tax' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS14", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: a21a9a21-b99b-48b3-9b8c-89bcdf583f2f
+
+	measure 'Net Profit' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS17", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 0d2e3819-c4bf-4ef1-9e74-63dface8bf8c
+
+	measure 'Net Profit Shareholders' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS19", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: e14d881f-f58f-4479-bf69-6f788963a0e4
+
+	measure 'Basic EPS' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS20", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: 0.00
+		lineageTag: 67a4bd04-44c9-4113-900e-03024a4978d0
+
+	measure 'Diluted EPS' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS21", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: 0.00
+		lineageTag: 8770a765-d8e5-406f-a675-257e38c637ea
+
+	measure 'Administrative Expenses' = -CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] = "IS10", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: acbe7e88-77ff-4d01-b220-9bd183ac8865
+
+	/// CIR denominator includes IS03, IS06, IS07, IS08 and IS09; excludes other operating expenses and ECL.
+	measure 'Operating Income CIR Basis' = CALCULATE(SUM(Income_Statement[Amount]), Income_Statement[Account_Key] IN {"IS03", "IS06", "IS07", "IS08", "IS09"}, TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 75f83bce-0ad3-40a4-ba98-b5b65f29ebe0
+
+	measure 'Cost to Income' = DIVIDE([Administrative Expenses], [Operating Income CIR Basis])
+		formatString: 0.0%
+		lineageTag: af3b0e1a-8227-48cc-8841-68e749413ac3
+
+	measure 'NII Q1 2025' = CALCULATE([Net Interest Income], REMOVEFILTERS(Dim_Date), Dim_Date[Date_Value] = DATE(2025, 3, 31))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 7263f50f-a436-4619-b940-b7b08f57c0f9
+
+	measure 'Net Profit Q1 2025' = CALCULATE([Net Profit], REMOVEFILTERS(Dim_Date), Dim_Date[Date_Value] = DATE(2025, 3, 31))
+		formatString: #,##0;(#,##0);-
+		lineageTag: bd7ee7b2-8b35-4b48-995e-3ea9178a92d4
+
+	measure 'NII Change YoY' = [Net Interest Income] - [NII Q1 2025]
+		formatString: #,##0;(#,##0);-
+		lineageTag: ee7235d0-4cbd-47e6-a4f0-b3044a5b75a6
+
+	measure 'NII Growth YoY' = DIVIDE([NII Change YoY], [NII Q1 2025])
+		formatString: 0.0%;(0.0%);-
+		lineageTag: d21d9603-8be9-4622-9d4b-d7bc00aea1a5
+
+	measure 'Net Profit Change YoY' = [Net Profit] - [Net Profit Q1 2025]
+		formatString: #,##0;(#,##0);-
+		lineageTag: 32da7759-715c-4333-ba36-135d2ec39309
+
+	measure 'Net Profit Growth YoY' = DIVIDE([Net Profit Change YoY], [Net Profit Q1 2025])
+		formatString: 0.0%;(0.0%);-
+		lineageTag: ff12aaa5-c686-46a3-9b83-a038cdf0f3e3
+
+	/// Annualized factor 4 and two-point average assets; valid for Q1 2026 only.
+	measure 'ROA Annualized 2-Point' = DIVIDE([Net Profit] * 4, ([Total Assets] + [Assets Dec 2025]) / 2)
+		formatString: 0.0%
+		lineageTag: 7155b6d5-6178-4668-b8f9-0dbdb2fff317
+
+	/// Annualized factor 4 and two-point average shareholders equity; valid for Q1 periods.
+	measure 'ROE Annualized 2-Point' = DIVIDE([Net Profit Shareholders] * 4, (CALCULATE(SUM(Equity[Amount]), Equity[Movement_Type] = "Opening", Equity[Component] = "Total Shareholders' Equity", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value])) + CALCULATE(SUM(Equity[Amount]), Equity[Movement_Type] = "Closing", Equity[Component] = "Total Shareholders' Equity", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))) / 2)
+		formatString: 0.0%
+		lineageTag: 83a12948-c38f-487a-bebb-d2e42fbbdb01
+
+	/// Grand total row only; excludes the customer-category and stage detail rows.
+	measure 'Gross Loans Total' = CALCULATE(SUM(Credit_Risk[Amount]), Credit_Risk[Table_Name] = "Loans_by_Stage", Credit_Risk[Instrument_Type] = "Loans and advances to customers", Credit_Risk[Metric] = "Gross carrying amount", Credit_Risk[Sub_Category] = "Total", Credit_Risk[Stage] = "Total", Credit_Risk[Row_Type] = "Grand total", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 2d6e3569-9da2-4d64-a277-d50d18533ef4
+
+	measure 'Stage 2 Loans' = CALCULATE(SUM(Credit_Risk[Amount]), Credit_Risk[Table_Name] = "Loans_by_Stage", Credit_Risk[Instrument_Type] = "Loans and advances to customers", Credit_Risk[Metric] = "Gross carrying amount", Credit_Risk[Stage] = "Stage 2", Credit_Risk[Row_Type] = "Line item", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 32fb13db-293b-4163-afb3-0333a9dca7b4
+
+	measure 'Stage 3 Loans' = CALCULATE(SUM(Credit_Risk[Amount]), Credit_Risk[Table_Name] = "Loans_by_Stage", Credit_Risk[Instrument_Type] = "Loans and advances to customers", Credit_Risk[Metric] = "Gross carrying amount", Credit_Risk[Stage] = "Stage 3", Credit_Risk[Row_Type] = "Line item", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: a2e55034-6077-4637-8482-68252d2ba278
+
+	measure 'Stage 2 and 3 Total' = [Stage 2 Loans] + [Stage 3 Loans]
+		formatString: #,##0;(#,##0);-
+		lineageTag: 939e7b24-d32d-48e8-9823-0cc5b120924a
+
+	measure 'Stage 2 Ratio' = DIVIDE([Stage 2 Loans], [Gross Loans Total])
+		formatString: 0.0%
+		lineageTag: 75b7655c-7797-412f-b0bc-162666c8c767
+
+	measure 'Stage 3 Ratio' = DIVIDE([Stage 3 Loans], [Gross Loans Total])
+		formatString: 0.00%
+		lineageTag: bc73815e-11ea-4685-8fdb-c310f8b272f1
+
+	measure 'Stage 2 or 3 Ratio' = DIVIDE([Stage 2 and 3 Total], [Gross Loans Total])
+		formatString: 0.0%
+		lineageTag: 9e0a1b0b-4d2d-46be-8084-a092c4403287
+
+	/// ECL_by_Stage customer total is source-reported positive; no sign inversion.
+	measure 'Customer ECL' = CALCULATE(SUM(Credit_Risk[Amount]), Credit_Risk[Table_Name] = "ECL_by_Stage", Credit_Risk[Instrument_Type] = "Loans and advances to customers", Credit_Risk[Sub_Category] = "Total", Credit_Risk[Stage] = "Total", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 35ccfd14-2f7f-42a3-9660-768db7d29a0e
+
+	measure 'ECL Coverage' = DIVIDE([Customer ECL], [Gross Loans Total])
+		formatString: 0.00%
+		lineageTag: 6fbb24f2-9749-433d-87bd-2f4e440dc653
+
+	measure 'Operating Cash Flow' = CALCULATE(SUM(Cash_Flow[Amount]), Cash_Flow[Account_Key] = "CF29", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 5e609a6b-75f8-467e-aa83-3371d90eecc3
+
+	measure 'Investing Cash Flow' = CALCULATE(SUM(Cash_Flow[Amount]), Cash_Flow[Account_Key] = "CF37", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: f28fa6bd-5e70-4d80-8883-a2449600aa22
+
+	measure 'Financing Cash Flow' = CALCULATE(SUM(Cash_Flow[Amount]), Cash_Flow[Account_Key] = "CF41", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 6e7510f8-ca39-44d5-b954-0ca11c09f350
+
+	measure 'Closing Cash' = CALCULATE(SUM(Cash_Flow[Amount]), Cash_Flow[Account_Key] = "CF44", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: bb50c913-7cac-4b2a-b603-dffbc5370a1b
+
+	measure 'Equity Movement Amount' = CALCULATE(SUM(Equity[Amount]), TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 58fdd15a-c9b3-4d94-be5c-f2b37a605ded
+
+	/// Segment rows only, excluding all total rows. Q1-25 and Q1-26 have different profit bases.
+	measure 'Segment Profit' = CALCULATE(SUM(Segments[Amount]), Segments[Metric] = "Profit for the period", Segments[Row_Type] = "Segment", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: c4a53cef-a981-4598-a3b7-562e08abcee2
+
+	measure 'Segment Contribution' = DIVIDE([Segment Profit], CALCULATE([Segment Profit], ALLSELECTED(Dim_Segment[Segment])))
+		formatString: 0.0%
+		lineageTag: f5564d5c-549c-4202-980e-b3cdbb32cc15
+
+	measure 'Reported CAR' = CALCULATE(MAX(Financial_Ratios[Value]), Financial_Ratios[Metric] = "Capital Adequacy Ratio (CAR)", Financial_Ratios[Scope] = "Total", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: 0.0%
+		lineageTag: 460e3767-141e-4070-baba-19b76615e18f
+
+	measure 'Reported Leverage Ratio' = CALCULATE(MAX(Financial_Ratios[Value]), Financial_Ratios[Metric] = "Leverage Ratio", Financial_Ratios[Scope] = "Total", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: 0.0%
+		lineageTag: 892a6028-8a29-4ff0-a269-69318e3b1a4d
+
+	measure 'Reported NSFR' = CALCULATE(MAX(Financial_Ratios[Value]), Financial_Ratios[Metric] = "NSFR", Financial_Ratios[Scope] = "Total", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: 0.0%
+		lineageTag: 05806272-2f59-4022-b1e4-33b0a0ed4481
+
+	measure 'Reported LCR' = CALCULATE(MAX(Financial_Ratios[Value]), Financial_Ratios[Metric] = "LCR", Financial_Ratios[Scope] = "Total", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: 0.0%
+		lineageTag: 2c1fa714-2f9a-4016-9e03-4dee9956f968
+
+	measure 'Balance Sheet Line Item Amount' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Row_Type] = "Line item", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 98fade00-96e8-47e0-93ac-fdcaab9a02a4
+
+	measure 'Asset Line Item Amount' = CALCULATE(SUM(Balance_Sheet[Amount]), Balance_Sheet[Row_Type] = "Line item", Balance_Sheet[Category] = "Assets", TREATAS({[Selected Reporting Date]}, Dim_Date[Date_Value]))
+		formatString: #,##0;(#,##0);-
+		lineageTag: 213f5bc0-3a7e-4947-a40d-e11cc680a263
+
+	measure 'Balance Sheet Comparison Note' = "Balance comparison uses 31-Dec-2025; 31-Mar-2025 balance sheet is unavailable in the source."
+		formatString: General
+		lineageTag: 94d8aefb-c37f-4921-b63a-e0e405eac29c
+
+	measure 'Segment Basis Note' = "Segment profit comparison caveat: Q1-2025 is on shareholders-profit basis; Q1-2026 is on consolidated net profit basis."
+		formatString: General
+		lineageTag: 2d286b91-0905-43ee-b176-2d144219116a
+
+	measure 'Executive Summary Arabic' = "حتى 31 مارس 2026: نمو الأصول " & FORMAT([Assets Growth vs Dec 2025], "0.0%") & "، ونمو صافي دخل الفوائد " & FORMAT([NII Growth YoY], "0.0%") & "، ونمو صافي الربح " & FORMAT([Net Profit Growth YoY], "0.0%") & " مقابل الربع الأول 2025."
+		formatString: General
+		lineageTag: 7f9ac230-439f-46a2-8aaf-5ea6e46e9a09
+
+	column 'Calculated KPIs (derived from reported data sheets - NOT reported by the bank)'
+		dataType: string
+		lineageTag: 56299111-26a9-4437-bf32-a9f7d5ac6652
+		summarizeBy: none
+		sourceColumn: Calculated KPIs (derived from reported data sheets - NOT reported by the bank)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: 0e7836eb-6763-4eef-88af-0f30e1bbcd18
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 6357aaff-2b73-4b58-83ff-928529055900
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: 698f5ba3-bae5-4a8e-b1fc-8f20dcfe080b
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column5
+		dataType: string
+		lineageTag: 74d3e35f-278c-4636-ad37-6997538853b6
+		summarizeBy: none
+		sourceColumn: Column5
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column6
+		dataType: string
+		lineageTag: 7136a908-73c6-4851-b05e-45bd8172bde8
+		summarizeBy: none
+		sourceColumn: Column6
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column7
+		dataType: string
+		lineageTag: 89645afb-e733-4a9b-8221-1c8fedc6f821
+		summarizeBy: none
+		sourceColumn: Column7
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column8
+		dataType: string
+		lineageTag: 4a9c1048-58a8-47f3-9a34-43f88bf26b02
+		summarizeBy: none
+		sourceColumn: Column8
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Calc = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    KPI_Calc_Sheet = Source{[Item="KPI_Calc",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(KPI_Calc_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Calculated KPIs (derived from reported data sheets - NOT reported by the bank)", type text}, {"Column2", type any}, {"Column3", type text}, {"Column4", type any}, {"Column5", type any}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

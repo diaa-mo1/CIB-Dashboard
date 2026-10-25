@@ -1,0 +1,84 @@
+table Financial_Ratios
+	lineageTag: b98c4651-7af9-4bf8-b88f-b2e536817cca
+
+	column Metric
+		dataType: string
+		lineageTag: 0f57c73b-ca1f-4695-9a8c-018ebb3d4b6d
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scope
+		dataType: string
+		lineageTag: 3a3d2578-6a5c-4352-99d8-6a9188e90c9d
+		summarizeBy: none
+		sourceColumn: Scope
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 364365ea-9793-4632-87fe-dad5033bd786
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: f5605b66-6f8a-4a21-99cc-0ca3e19f4db4
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Unit
+		dataType: string
+		lineageTag: ca97b572-f36a-40da-8da0-30fd81adb08e
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f3b6b73-0b30-431a-b066-5310247f22e2
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: 7e439fd6-e8b2-4aef-9ee3-f345115945b3
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 10baee71-c43c-4b08-9dfd-95c75d49c141
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Financial_Ratios = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Financial_Ratios_Sheet = Source{[Item="Financial_Ratios",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Financial_Ratios_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Metric", type text}, {"Scope", type text}, {"Reporting_Date", Int64.Type}, {"Value", type number}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

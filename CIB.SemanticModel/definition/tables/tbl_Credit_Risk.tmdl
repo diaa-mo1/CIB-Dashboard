@@ -1,0 +1,123 @@
+table tbl_Credit_Risk
+	isHidden
+	lineageTag: 434cfa17-8a3f-40c0-a7f3-8f1e550f2ef4
+
+	column Table_Name
+		dataType: string
+		lineageTag: b752d4ce-281c-45f0-b762-0279e6362ea8
+		summarizeBy: none
+		sourceColumn: Table_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 54f2c4fb-0436-486c-9b90-29672b151507
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instrument_Type
+		dataType: string
+		lineageTag: aa7acd34-3044-4ce9-b1a5-a6e888c7834a
+		summarizeBy: none
+		sourceColumn: Instrument_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub_Category
+		dataType: string
+		lineageTag: 80431127-c8c7-4a5e-8866-227fb0a6ad8a
+		summarizeBy: none
+		sourceColumn: Sub_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		dataType: string
+		lineageTag: 6b4c10bd-62d2-4d78-9a59-7bcd56301897
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stage
+		dataType: string
+		lineageTag: 565c5528-2c9f-4b67-8cad-d40e18ffc7f4
+		summarizeBy: none
+		sourceColumn: Stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: f20c6614-4307-46a0-a85f-1158dc7322be
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d0dec48-e811-4404-a0d1-9b6f0f5cc7af
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 59890c00-0c8e-433a-b57b-12a329d02f60
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 4803e2a6-01f6-4979-8939-ec041fb3c44e
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 2391f8cf-9489-4d82-81e8-7b66698a82cb
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: b4a9a763-34bc-42ea-8c25-c3017b543cce
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 85645d17-bfb9-45a5-9683-04bd4a9cb306
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Credit_Risk = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Credit_Risk_Table = Source{[Item="tbl_Credit_Risk",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Credit_Risk_Table,{{"Table_Name", type text}, {"Reporting_Date", Int64.Type}, {"Instrument_Type", type text}, {"Sub_Category", type text}, {"Metric", type text}, {"Stage", type text}, {"Row_Type", type text}, {"Amount", Int64.Type}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

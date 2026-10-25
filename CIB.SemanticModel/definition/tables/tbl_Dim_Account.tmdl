@@ -1,0 +1,83 @@
+table tbl_Dim_Account
+	isHidden
+	lineageTag: ffa2cfbe-fd3d-40fe-a035-2cf7c1f99258
+
+	column Account_Key
+		dataType: string
+		lineageTag: 2b1e6adf-420b-4787-a72f-896d0ec80664
+		summarizeBy: none
+		sourceColumn: Account_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statement
+		dataType: string
+		lineageTag: f5a6a67c-9fa1-44b4-9c89-3c65bc31bfdc
+		summarizeBy: none
+		sourceColumn: Statement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 16777552-4f30-43d8-858d-b1648c418dac
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_Name
+		dataType: string
+		lineageTag: d8533faf-8b0e-4937-8b48-45141e3934a6
+		summarizeBy: none
+		sourceColumn: Account_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: f24c1f6b-7069-4244-a0db-1ed44b0f5e3b
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note_Ref
+		dataType: double
+		lineageTag: bf6147bd-97e0-40c1-a7cf-3b702a93ab58
+		summarizeBy: sum
+		sourceColumn: Note_Ref
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sort_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 78ad1f5f-1d22-49af-8ee0-530229350782
+		summarizeBy: sum
+		sourceColumn: Sort_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Is_Total
+		dataType: string
+		lineageTag: 50c1b932-6e8b-4211-8744-205c4ad74dc5
+		summarizeBy: none
+		sourceColumn: Is_Total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Dim_Account = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Dim_Account_Table = Source{[Item="tbl_Dim_Account",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Dim_Account_Table,{{"Account_Key", type text}, {"Statement", type text}, {"Category", type text}, {"Account_Name", type text}, {"Row_Type", type text}, {"Note_Ref", type number}, {"Sort_Order", Int64.Type}, {"Is_Total", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

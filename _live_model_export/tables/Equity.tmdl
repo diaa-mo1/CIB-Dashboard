@@ -1,0 +1,159 @@
+table Equity
+	lineageTag: 43ea29bb-f68d-43bd-8c7f-93c469ac7530
+
+	column Statement
+		dataType: string
+		lineageTag: 78d2a8ac-23d7-4543-ad94-be3e8a19f2fc
+		summarizeBy: none
+		sourceColumn: Statement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Label
+		dataType: string
+		lineageTag: 2b637acc-eec6-45db-a27d-35dff11de4d1
+		summarizeBy: none
+		sourceColumn: Period_Label
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 29ee6ca8-bc7b-42e6-af92-9734038e82c7
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Start_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 5168dff6-f8cd-4ae4-96dd-5415c9294b7e
+		summarizeBy: sum
+		sourceColumn: Period_Start_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_End_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 5b971339-0f93-46c1-bd8d-24e0a5e857d8
+		summarizeBy: sum
+		sourceColumn: Period_End_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movement
+		dataType: string
+		lineageTag: 7c29a279-2777-4834-b3a7-68a8cfbb2c94
+		summarizeBy: none
+		sourceColumn: Movement
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movement_Type
+		dataType: string
+		lineageTag: 76cb6be1-9ccf-4e1e-8d5e-0dd1f0e78bd5
+		summarizeBy: none
+		sourceColumn: Movement_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movement_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: b40eacf7-1572-402c-a6eb-138523f929ba
+		summarizeBy: sum
+		sourceColumn: Movement_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Component
+		dataType: string
+		lineageTag: bfa225fc-501f-408e-9066-6055998e414d
+		summarizeBy: none
+		sourceColumn: Component
+
+		annotation SummarizationSetBy = Automatic
+
+	column Component_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b114fc6-fe59-4799-827a-f7c16792921b
+		summarizeBy: sum
+		sourceColumn: Component_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Component_Type
+		dataType: string
+		lineageTag: 1dbb01e4-b92e-4891-b605-6647fb339086
+		summarizeBy: none
+		sourceColumn: Component_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: 734f0394-e091-4a23-a3e8-c3fa5a65df1d
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: d893a4df-b93a-4e8c-b04c-882639c30eb9
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 42a0aa81-b573-44ae-a85e-87745b0bf58e
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 35402946-1bad-4b13-b996-9915ad4684d9
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: 6c6abe3a-b6df-42c3-b88d-356a2127d14c
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 001f93ce-cb5b-44f5-b778-42060204244d
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Equity = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    Equity_Sheet = Source{[Item="Equity",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Equity_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Statement", type text}, {"Period_Label", type text}, {"Reporting_Date", Int64.Type}, {"Period_Start_Date", Int64.Type}, {"Period_End_Date", Int64.Type}, {"Movement", type text}, {"Movement_Type", type text}, {"Movement_Order", Int64.Type}, {"Component", type text}, {"Component_Order", Int64.Type}, {"Component_Type", type text}, {"Amount", Int64.Type}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

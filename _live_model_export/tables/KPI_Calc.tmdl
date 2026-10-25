@@ -1,0 +1,84 @@
+table KPI_Calc
+	lineageTag: 34343179-d0c7-4d26-82ae-e742b2a726a0
+
+	/// Dynamic Arabic summary of observed balance growth and Q1 year-on-year income growth.
+	measure 'Executive Summary Arabic' = "حتى 31 مارس 2026: نمو الأصول " & FORMAT([Assets Growth vs Dec 2025],"0.0%") & "، ونمو صافي دخل الفوائد " & FORMAT([NII Growth YoY],"0.0%") & "، ونمو صافي الربح " & FORMAT([Net Profit Growth YoY],"0.0%") & " مقابل الربع الأول 2025."
+		formatString: General
+
+	column 'Calculated KPIs (derived from reported data sheets - NOT reported by the bank)'
+		dataType: string
+		lineageTag: 56299111-26a9-4437-bf32-a9f7d5ac6652
+		summarizeBy: none
+		sourceColumn: Calculated KPIs (derived from reported data sheets - NOT reported by the bank)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: 0e7836eb-6763-4eef-88af-0f30e1bbcd18
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 6357aaff-2b73-4b58-83ff-928529055900
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: 698f5ba3-bae5-4a8e-b1fc-8f20dcfe080b
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column5
+		dataType: string
+		lineageTag: 74d3e35f-278c-4636-ad37-6997538853b6
+		summarizeBy: none
+		sourceColumn: Column5
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column6
+		dataType: string
+		lineageTag: 7136a908-73c6-4851-b05e-45bd8172bde8
+		summarizeBy: none
+		sourceColumn: Column6
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column7
+		dataType: string
+		lineageTag: 89645afb-e733-4a9b-8221-1c8fedc6f821
+		summarizeBy: none
+		sourceColumn: Column7
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column8
+		dataType: string
+		lineageTag: 4a9c1048-58a8-47f3-9a34-43f88bf26b02
+		summarizeBy: none
+		sourceColumn: Column8
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Calc = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    KPI_Calc_Sheet = Source{[Item="KPI_Calc",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(KPI_Calc_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Calculated KPIs (derived from reported data sheets - NOT reported by the bank)", type text}, {"Column2", type any}, {"Column3", type text}, {"Column4", type any}, {"Column5", type any}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

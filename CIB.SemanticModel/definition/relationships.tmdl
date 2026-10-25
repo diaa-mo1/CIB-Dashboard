@@ -1,0 +1,79 @@
+relationship 54ad35ff-6319-4794-9b7a-7149ebecdbb7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: tbl_Dim_Date.Period_Label
+	toColumn: LocalDateTable_2e22a309-16ce-45a1-aa1a-73aadb97e4bb.Date
+
+relationship e90f612b-2584-4e41-83e1-b9e7d52ed4f5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Date.Period_Label
+	toColumn: LocalDateTable_cc6d1fac-f12e-4bb4-9fee-b8f4b2e43643.Date
+
+relationship 120b0001-0001-4000-8000-000000000001
+	fromColumn: Balance_Sheet.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000002
+	fromColumn: Income_Statement.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000003
+	fromColumn: Comprehensive_Income.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000004
+	fromColumn: Cash_Flow.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000005
+	fromColumn: Equity.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000006
+	fromColumn: Credit_Risk.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000007
+	fromColumn: Loans_Advances.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000008
+	fromColumn: Financial_Investments.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000009
+	fromColumn: Segments.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000010
+	fromColumn: Other_Notes.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000011
+	fromColumn: Financial_Ratios.Reporting_Date
+	toColumn: Dim_Date.Date
+
+relationship 120b0001-0001-4000-8000-000000000012
+	fromColumn: Balance_Sheet.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship 120b0001-0001-4000-8000-000000000013
+	fromColumn: Income_Statement.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship 120b0001-0001-4000-8000-000000000014
+	fromColumn: Comprehensive_Income.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship 120b0001-0001-4000-8000-000000000015
+	fromColumn: Cash_Flow.Account_Key
+	toColumn: Dim_Account.Account_Key
+
+relationship 120b0001-0001-4000-8000-000000000017
+	fromColumn: Segments.Segment_Key
+	toColumn: Dim_Segment.Segment_Key
+
+relationship da40454d-a0a3-40e3-8ead-e9eaf47005d2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Date.Date_Value
+	toColumn: LocalDateTable_b61564be-fc77-499c-8a7d-1a15489a12c1.Date
+

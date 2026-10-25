@@ -1,0 +1,133 @@
+table tbl_Segments
+	isHidden
+	lineageTag: de3273af-2e1f-4b04-88de-7a544a5741be
+
+	column Segment_Type
+		dataType: string
+		lineageTag: 15680ceb-99ef-4ed1-b67c-29543c79e1c0
+		summarizeBy: none
+		sourceColumn: Segment_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: bded8937-88a3-49d1-af0d-28c2f4ecaa70
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		dataType: string
+		lineageTag: 73a497d8-587a-420f-b0b0-ac80b6c95999
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric_Type
+		dataType: string
+		lineageTag: 48a75413-d928-40da-a692-0c411bc1775d
+		summarizeBy: none
+		sourceColumn: Metric_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_Type
+		dataType: string
+		lineageTag: e2a076a9-4949-4295-ba01-a47fda1d37e2
+		summarizeBy: none
+		sourceColumn: Row_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 37cf105c-5a3f-40e9-9299-70871a5ab1bc
+		summarizeBy: sum
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_Start_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: eca6f786-3ac5-42d8-9659-cd77d56fb56e
+		summarizeBy: sum
+		sourceColumn: Period_Start_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_End_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 9afed7da-4639-449a-bcf8-a54e1684cba3
+		summarizeBy: sum
+		sourceColumn: Period_End_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: 04c3f344-6170-49b1-99c3-7adedc5cac2d
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 8ed90dcf-a07d-40cb-bc97-844b4e2ca333
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 6f5f6906-7d02-4ddf-a8cf-fc0f86d63602
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Page
+		dataType: int64
+		formatString: 0
+		lineageTag: 58d29930-bdc4-43ec-a286-d057152a691b
+		summarizeBy: sum
+		sourceColumn: Source_Page
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Note
+		dataType: string
+		lineageTag: d4f96dee-51f1-458c-9b6d-d0578d647d97
+		summarizeBy: none
+		sourceColumn: Source_Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Status
+		dataType: string
+		lineageTag: 7afc2bd7-432d-4a6e-8d39-1e12931ce69a
+		summarizeBy: none
+		sourceColumn: Data_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tbl_Segments = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\diaa\Desktop\CIB\CIB_Q1_2026_Financial_Data.xlsx"), null, true),
+				    tbl_Segments_Table = Source{[Item="tbl_Segments",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(tbl_Segments_Table,{{"Segment_Type", type text}, {"Segment", type text}, {"Metric", type text}, {"Metric_Type", type text}, {"Row_Type", type text}, {"Reporting_Date", Int64.Type}, {"Period_Start_Date", Int64.Type}, {"Period_End_Date", Int64.Type}, {"Amount", Int64.Type}, {"Currency", type text}, {"Unit", type text}, {"Source_Page", Int64.Type}, {"Source_Note", type text}, {"Data_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
